@@ -1,0 +1,4 @@
+{
+   "1886ced346de75c8e369a750cf832399e78427fc4d474dccf396550aa689ceca": "fragment AuthUser on User {\n  id\n  email\n  isActivated\n  role\n  __typename\n}\nmutation AuthLogIn($loginUserInput: LoginUserInput!) {\n  result: login(loginUserInput: $loginUserInput) {\n    user {\n      ...AuthUser\n      __typename\n    }\n    tokens {\n      accessToken\n      refreshToken\n      __typename\n    }\n    __typename\n  }\n}",
+   "073cb77e694b0c965df6885e6480152d22a9a717b27beb53a47039a33ee78f0f": "fragment AuthUser on User {\n  id\n  email\n  isActivated\n  role\n  __typename\n}\nquery AuthGetUser {\n  user: getCurrentUser {\n    ...AuthUser\n    __typename\n  }\n}"
+}

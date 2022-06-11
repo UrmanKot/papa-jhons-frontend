@@ -1,0 +1,32 @@
+overwrite: true
+schema: "http://localhost:3200/graphql"
+documents:
+  - "projects/**/*.graphql" # deprecated
+  - "projects/**/*.gql"
+  - "shared/**/*.graphql" # deprecated
+  - "shared/**/*.gql"
+generates:
+
+  shared/graphql.schema.json:
+    plugins:
+      - introspection
+    config:
+      minify: true
+
+  shared/graphql.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-apollo-angular
+    config:
+      addExplicitOverride: true
+
+  shared/graphql.client.json:
+    - graphql-codegen-persisted-query-ids:
+        output: client
+        algorithm: sha256
+
+  shared/graphql.server.json:
+    - graphql-codegen-persisted-query-ids:
+        output: server
+        algorithm: sha256

@@ -1,0 +1,22 @@
+{
+  "name": "template",
+  "schemaPath": "schema.graphql",
+  "includes": ["./**/*.gql"],
+  "extensions": {
+    "endpoints": {
+      "default": {
+        "url": "",
+        "headers": {
+          "authorization": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNjQ3NTgzMTM4LCJvcmlnSWF0IjoxNjQ3NTgyODM4fQ.ayTDY2wyG7bQxMKVWO7UGQZyBeYaQd8RdjYNVglHrHY"
+        }
+      },
+      "local": {
+        "url": "http://127.0.0.1:3200/graphql/",
+        "headers": {
+          "authorization": "JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNjQ3NTgzMTM4LCJvcmlnSWF0IjoxNjQ3NTgyODM4fQ.ayTDY2wyG7bQxMKVWO7UGQZyBeYaQd8RdjYNVglHrHY"
+        }
+      },
+      "introspect": false
+    }
+  }
+}

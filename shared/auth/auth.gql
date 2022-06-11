@@ -1,0 +1,24 @@
+mutation AuthLogIn($loginUserInput: LoginUserInput!) {
+  result: login(loginUserInput: $loginUserInput) {
+    user {
+      ...AuthUser
+    }
+    tokens {
+      accessToken
+      refreshToken
+    }
+  }
+}
+
+query AuthGetUser {
+  user: getCurrentUser {
+    ...AuthUser
+  }
+}
+
+fragment AuthUser on User {
+  id
+  email
+  isActivated
+  role
+}
