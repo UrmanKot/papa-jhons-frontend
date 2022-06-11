@@ -40,7 +40,7 @@
       },
       "root": "projects/public",
       "sourceRoot": "projects/public/src",
-      "prefix": "app",
+      "prefix": "ppj",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -185,9 +185,16 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "projects/admin/src/favicon.ico",
-              "projects/admin/src/assets"
+              "projects/admin/src/assets",
+              {
+                "glob": "**/*",
+                "input": "node_modules/@taiga-ui/icons/src",
+                "output": "assets/taiga-ui/icons"
+              }
             ],
             "styles": [
+              "node_modules/@taiga-ui/core/styles/taiga-ui-global.less",
+              "node_modules/@taiga-ui/core/styles/taiga-ui-theme.less",
               "projects/admin/src/styles.scss"
             ],
             "scripts": []
