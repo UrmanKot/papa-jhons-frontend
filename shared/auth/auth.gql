@@ -16,7 +16,7 @@ query AuthGetUser {
   }
 }
 
-fragment AuthUser on User {
+fragment AuthUser on UserNode {
   id
   email
   isActivated

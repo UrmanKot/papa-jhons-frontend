@@ -3,20 +3,87 @@
 schema {
   query: Query
   mutation: Mutation
+  subscription: Subscription
 }
 
 type LoginUserResponse {
   tokens: Tokens!
-  user: User!
+  user: UserNode!
 }
 
 type Mutation {
   login(loginUserInput: LoginUserInput!): LoginUserResponse!
-  register(createUserInput: CreateUserInput!): User!
+  productCreate(createProductInput: CreateProductInput!, file: Upload): ProductNode!
+  productRemove(id: String!): Boolean!
+  register(createUserInput: CreateUserInput!): UserNode!
+}
+
+type PageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+}
+
+type ProductNode {
+  "Углеводы"
+  carbs: Int
+  category: ProductCategoryType!
+  "Количество"
+  count: Int
+  createdAt: DateTime!
+  description: String!
+  "Энергетическая ценность"
+  energyValue: Int
+  "Жиры"
+  greases: Int
+  id: String!
+  idNumber: ID!
+  image: String
+  "Добавить пищевую ценность?"
+  isAddNutritionalValue: Boolean!
+  name: String!
+  "Цена"
+  price: Int!
+  "Белки"
+  proteins: Int
+  "Цена по скидке"
+  salePrice: Int
+  updatedAt: DateTime!
+  "Вес"
+  weight: Int
+}
+
+type ProductNodeConnection {
+  edges: [ProductNodeEdge!]!
+  pageInfo: PageInfo!
+}
+
+type ProductNodeEdge {
+  cursor: String!
+  node: ProductNode!
 }
 
 type Query {
-  getCurrentUser: User!
+  getCurrentUser: UserNode!
+  product(id: String!): ProductNode!
+  products: [ProductNode!]!
+  products2(
+    "Paginate after opaque cursor"
+    after: String,
+    "Paginate before opaque cursor"
+    before: String,
+    "Paginate first"
+    first: Int,
+    "Paginate last"
+    last: Int,
+    orderBy: OrderByInput,
+    where: ProductNodeWhereInput
+  ): ProductNodeConnection!
+}
+
+type Subscription {
+  productAdded: ProductNode!
 }
 
 type Tokens {
@@ -24,7 +91,7 @@ type Tokens {
   refreshToken: String!
 }
 
-type User {
+type UserNode {
   createdAt: DateTime!
   email: String!
   firstName: String!
@@ -33,17 +100,50 @@ type User {
   image: String
   isActivated: Boolean!
   lastName: String!
-  role: RoleEnum!
+  role: RoleType!
   updatedAt: DateTime!
 }
 
-enum RoleEnum {
+enum OrderByDirection {
+  ASC
+  DESC
+}
+
+enum ProductCategoryType {
+  COMBOBOX
+  DESSERT
+  DRINKS
+  HOT
+  PIZZA
+  SAUCES
+  SNACKS
+  VEGAN
+}
+
+enum RoleType {
   ADMIN
   USER
 }
 
 "A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format."
 scalar DateTime
+
+"The `Upload` scalar type represents a file upload."
+scalar Upload
+
+input CreateProductInput {
+  carbs: Int
+  category: String!
+  count: Int!
+  description: String!
+  energyValue: Int
+  greases: Int
+  isAddNutritionalValue: Boolean!
+  name: String!
+  price: Int!
+  proteins: Int
+  weight: Int
+}
 
 input CreateUserInput {
   email: String!
@@ -53,4 +153,13 @@ input CreateUserInput {
 input LoginUserInput {
   email: String!
   password: String!
+}
+
+input OrderByInput {
+  createdAt: OrderByDirection
+  updatedAt: OrderByDirection
+}
+
+input ProductNodeWhereInput {
+  name: String
 }

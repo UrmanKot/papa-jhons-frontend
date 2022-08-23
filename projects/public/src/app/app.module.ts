@@ -10,6 +10,8 @@ import {Apollo} from 'apollo-angular';
 import {RouterModule} from '@angular/router';
 import {ENVIRONMENT} from '#shared/environment';
 import {environment} from '../environments/environment';
+import {LayoutModule} from './layout/layout.module';
+import {LandingModule} from './landing/landing.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import {environment} from '../environments/environment';
     BrowserAnimationsModule,
     TuiDialogModule,
     TuiAlertModule,
+    LayoutModule,
+    LandingModule,
   ],
   providers: [
     {provide: ENVIRONMENT, useValue: environment},

@@ -1,0 +1,12 @@
+#mutation uploadFile($file: Upload!) {
+#  uploadFile(file: $file)
+#}
+
+#mutation createProduct($createProductInput: CreateProductInput!, $file: Upload) {
+#  createProduct(createProductInput: $createProductInput, file: $file) {
+#    name
+#    id
+#    idNumber
+#    image
+#  }
+#}

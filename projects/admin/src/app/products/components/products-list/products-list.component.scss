@@ -1,0 +1,34 @@
+img {
+  width: 4.25rem;
+  height: 3.125rem;
+  object-fit: cover;
+}
+
+.tui-table__th {
+  &_image {
+    width: 6.25rem
+  }
+
+  &_actions {
+    width: 8.75rem;
+    text-align: center;
+  }
+
+  &_price {
+    width: 6rem;
+  }
+
+  &_category {
+    width: 8rem;
+  }
+
+  &_name {
+    width: 20%;
+  }
+}
+
+.tui-table__td {
+  &_image {
+    text-align: center;
+  }
+}

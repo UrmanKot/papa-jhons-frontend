@@ -1,0 +1,11 @@
+<div class="main-container">
+  <div class="product-categories">
+    <ul class="product-categories__list">
+      <li class="product-categories__item" *ngFor="let category of productCategories">
+        <ppj-product-category
+          [productCategory]="category"
+        ></ppj-product-category>
+      </li>
+    </ul>
+  </div>
+</div>

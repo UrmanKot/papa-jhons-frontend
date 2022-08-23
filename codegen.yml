@@ -1,8 +1,9 @@
 overwrite: true
-schema: "http://localhost:3200/graphql"
+schema: "http://localhost:8080/graphql"
 documents:
   - "projects/**/*.graphql" # deprecated
-  - "projects/**/*.gql"
+  - "projects/**/*.gql":
+      skipGraphQLImport: true
   - "shared/**/*.graphql" # deprecated
   - "shared/**/*.gql"
 generates:

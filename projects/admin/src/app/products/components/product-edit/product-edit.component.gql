@@ -1,0 +1,44 @@
+query ProductsEditGetProduct($id: String!) {
+  object: product(id: $id) {
+    ...ProductsEditProduct
+  }
+}
+
+query test2($where: ProductNodeWhereInput) {
+  products2(where: $where, orderBy: {createdAt: DESC}) {
+    pageInfo {
+      endCursor
+      hasNextPage
+      hasPreviousPage
+      startCursor
+    }
+    edges {
+      node {
+        ...ProductsEditProduct
+      }
+      cursor
+    }
+  }
+}
+
+mutation ProductsEditSaveProduct($file: Upload, $createProductInput: CreateProductInput! ) {
+  object: productCreate(file: $file, createProductInput: $createProductInput) {
+    ...ProductsEditProduct
+  }
+}
+
+fragment ProductsEditProduct on ProductNode {
+  id
+  name
+  description
+  category
+  price
+  count
+  isAddNutritionalValue
+  proteins
+  greases
+  carbs
+  energyValue
+  weight
+  image
+}

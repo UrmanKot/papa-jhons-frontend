@@ -1,0 +1,110 @@
+<div class="admin-page">
+
+  <div class="admin-page__header">
+    <h1>{{id === 'new' ? 'Создание' : 'Редактирование'}} продукта</h1>
+  </div>
+
+<form [formGroup]="form" (ngSubmit)="save()">
+  <div class="admin-page__box">
+    <h2>Основные настройки</h2>
+
+    <img [src]="imageUrl ? API_URL + imageUrl : ''">
+    <tui-input-file
+      formControlName="file"
+      link="Выберите изображение продукта"
+      accept="image/*"
+    ></tui-input-file>
+
+    <tui-input
+      [tuiTextfieldCleaner]="true"
+      formControlName="name"
+    >
+      Название продукта<span class="tui-required"></span>
+    </tui-input>
+
+    <tui-text-area
+      formControlName="description"
+      [tuiTextfieldCleaner]="true"
+    >
+      Описание продукта<span class="tui-required"></span>
+    </tui-text-area>
+
+    <admin-product-category-picker
+      [currentCategoryType]="form.get('category').value"
+      (choiceCategory)="choiceCategory($event)">
+    </admin-product-category-picker>
+
+    <tui-input-number
+      formControlName="price"
+      [postfix]="'RUB' | tuiCurrency"
+    >
+      Цена<span class="tui-required"></span>
+    </tui-input-number>
+
+    <h2>Дополнительные настройки</h2>
+
+    <tui-input-count
+      formControlName="count" [min]="0"
+    >
+      Количество<span class="tui-required"></span>
+      <input tuiTextfield/>
+    </tui-input-count>
+
+    <tui-checkbox-labeled
+      formControlName="isAddNutritionalValue"
+      size="l"
+    >
+      Добавить пищевую ценность продукта
+    </tui-checkbox-labeled>
+
+    <div *ngIf="form.get('isAddNutritionalValue').value">
+      <h2>Пищевая ценность продукта на 100 г</h2>
+
+      <tui-input-count
+        formControlName="proteins" [min]="0"
+      >
+        Белки
+        <input tuiTextfield/>
+      </tui-input-count>
+
+      <tui-input-count
+        formControlName="greases" [min]="0"
+      >
+        Жиры
+        <input tuiTextfield/>
+      </tui-input-count>
+
+      <tui-input-count
+        formControlName="carbs" [min]="0"
+      >
+        Углеводы
+        <input tuiTextfield/>
+      </tui-input-count>
+
+      <tui-input-count
+        formControlName="energyValue" [min]="0"
+      >
+        Энергетическая ценность
+        <input tuiTextfield/>
+      </tui-input-count>
+
+      <tui-input-count
+        formControlName="weight" [min]="0"
+      >
+        Вес
+        <input tuiTextfield/>
+      </tui-input-count>
+    </div>
+  </div>
+
+  <button
+    [disabled]="form.invalid"
+    tuiButton
+    size="m"
+    type="submit"
+    [showLoader]="isSaving"
+  >
+    Сохранить
+  </button>
+</form>
+</div>

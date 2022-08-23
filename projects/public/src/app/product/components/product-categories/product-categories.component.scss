@@ -1,0 +1,20 @@
+.product-categories {
+  background: #fff;
+  border-radius: 1.5rem;
+  padding: 1.25rem 2rem;
+  box-shadow: 0 0 10px rgb(69 69 69 / 10%);
+
+  &__list {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+
+    ppj-product-category {
+      flex: 1;
+    }
+  }
+}

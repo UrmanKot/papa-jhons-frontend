@@ -1,0 +1,19 @@
+.admin {
+  padding-top: 4rem;
+  display: flex;
+
+  &__navigation {
+    position: fixed;
+    top: 4rem;
+    bottom: 0;
+    width: 16.25rem;
+    border-right: 1px solid var(--tui-base-03);
+  }
+
+  &__content {
+    margin-left: 16.25rem;
+    width: 100%;
+    padding: 3rem 6rem;
+  }
+}
+

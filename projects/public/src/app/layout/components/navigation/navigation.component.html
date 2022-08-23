@@ -1,0 +1,19 @@
+<nav class="navigation">
+  <ul class="navigation__list">
+    <li class="navigation__item" *ngFor="let link of navigationLinks">
+      <a [routerLink]="link.command" routerLinkActive="">{{link.label}}</a>
+    </li>
+    <li class="navigation__item navigation__item_action">
+      <a routerLinkActive="">Вход</a>
+    </li>
+    <li class="navigation__item navigation__item_language">
+      <a>Ru</a>
+    </li>
+  </ul>
+</nav>
+
+<img src="http://localhost:4100/static/pizz.vf.fb466120e94445991928360.webp">
+<input type="file" id="file" #inputFile (input)="imageManipulation($event, $event.target)"
+       accept="image/*">
+
+<button (click)="send()">test</button>

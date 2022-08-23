@@ -1,0 +1,16 @@
+<tui-select
+  [valueContent]="productCategory"
+  [formControl]="category"
+  (ngModelChange)="onChangeCategory()"
+>
+  Категория<span class="tui-required"></span>
+  <tui-data-list-wrapper
+    *tuiDataList
+    [items]="productCategories"
+    [itemContent]="productCategory"
+  ></tui-data-list-wrapper>
+</tui-select>
+
+<ng-template #productCategory let-category>
+  {{category.label}}
+</ng-template>

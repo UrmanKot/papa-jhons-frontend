@@ -1,0 +1,26 @@
+.navigation {
+  &__list {
+    display: flex;
+    align-items: center;
+  }
+
+  &__item {
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 1rem;
+    }
+
+    &_action {
+      text-transform: uppercase;
+    }
+
+    &_language {
+      margin-left: 1rem;
+      a {
+        padding: 0;
+      }
+    }
+  }
+}

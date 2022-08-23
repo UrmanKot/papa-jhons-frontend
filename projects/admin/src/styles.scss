@@ -1,1 +1,38 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'shared/styles/reset';
+
+body {
+  font-size: 16px;
+}
+
+.admin-page {
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+
+    h1 {
+      font: var(--tui-font-heading-3);
+    }
+  }
+
+  &__header-buttons {
+    margin-left: 3rem;
+  }
+}
+
+.island-box {
+  font: var(--tui-font-text-m);
+  padding: 1.5rem 2rem;
+  border: 1px solid var(--tui-base-03);
+  border-radius: var(--tui-radius-m);
+  background: var(--tui-elevation-02);
+  box-shadow: 0 .125rem .1875rem rgba(0,0,0,.1);
+
+  &_table {
+    padding: 1rem 2rem;
+  }
+}
+
+@import "app/shared/styles/tables";
+

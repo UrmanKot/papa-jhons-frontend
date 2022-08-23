@@ -21,9 +21,12 @@ import hashes from '#shared/graphql.client.json';
 import {onError} from '@apollo/client/link/error';
 import {Router} from '@angular/router';
 import {TokenService} from '#shared/services/token.service';
+import {createClient} from 'graphql-ws';
+import {GraphQLWsLink} from '@apollo/client/link/subscriptions';
+import {log} from 'util';
 
 
-const uri = '//localhost:3200/graphql';
+const uri = '//localhost:8080/graphql';
 // @ts-ignore
 export const schema = buildClientSchema(introspectionResult);
 export const APOLLO_CACHE = new InjectionToken<InMemoryCache>('apollo-cache');
@@ -77,8 +80,7 @@ function createApollo<TCacheShape>(
 
   const http = ApolloLink.from([withScalars({schema, typesMap}), auth, errorLink, createUploadLink(config)]);
 
-  let link = http;
-  // let link = isBrowser ? browserLink(config, isBrowser, http, localStorage) : http;
+  let link = isBrowser ? browserLink(config, isBrowser, http, localStorage) : http;
 
   if (env.production) {
     link = createPersistedQueryLink({
@@ -104,15 +106,33 @@ function createApollo<TCacheShape>(
 
 function browserLink(config: GraphQlConfig, isBrowser: boolean, http: ApolloLink, localStorage: LocalstorageService) {
 
+  // const ws = new WebSocketLink({
+  //   // uri: getWSUri(config, isBrowser),
+  //   uri: 'ws://localhost:4100/graphql',
+  //   options: {
+  //     reconnect: true,
+  //     // connectionParams: {
+  //     //   authToken: getAccessToken(localStorage),
+  //     // },
+  //   },
+  // });
+
+  // const ws = new GraphQLWsLink(
+  //   createClient({
+  //     url: "ws://localhost:8080/graphql/",
+  //     // url: getWSUri(config, isBrowser),
+  //   }),
+  // );
+
   const ws = new WebSocketLink({
-    uri: getWSUri(config, isBrowser),
+    uri: 'ws://localhost:8080/graphql',
     options: {
       reconnect: true,
-      connectionParams: {
-        authToken: getAccessToken(localStorage),
-      },
+
     },
   });
+
+  console.log('ws://localhost:4100/graphql')
 
   return split(
     ({query}) => {

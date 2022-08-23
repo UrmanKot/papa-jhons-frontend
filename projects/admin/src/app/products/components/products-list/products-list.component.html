@@ -1,0 +1,79 @@
+<div class="admin-page">
+
+  <div class="admin-page__header">
+    <h1>Список продуктов</h1>
+
+    <div class="admin-page__header-buttons">
+      <button
+        routerLink="new"
+        actionIcon="add"
+        type="button"
+        tuiButton
+        size="m"
+      >Добавить продукт
+      </button>
+    </div>
+  </div>
+
+  <div class="island-box island-box_table">
+
+    <tui-loader [showLoader]="isLoading" overlay="true">
+      <table class="admin__table tui-table">
+        <thead>
+        <tr class="tui-table__tr">
+          <th class="tui-table__th tui-table__th_image"></th>
+          <th class="tui-table__th tui-table__th_name">Название</th>
+          <th class="tui-table__th tui-table__th_description">Описание</th>
+          <th class="tui-table__th tui-table__th_category tui-table__th_text_center">Категория</th>
+          <th class="tui-table__th tui-table__th_price tui-table__th_text_center">Цена</th>
+          <th class="tui-table__th tui-table__th_actions tui-table__th_text_center">Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="tui-table__tr" *ngFor="let product of products">
+          <td class="tui-table__td tui-table__td_image">
+            <img [src]="product.image ? API_URL + product.image : 'assets/img/default-image.png'" [alt]="'Изображение ' + product.name">
+          </td>
+          <td class="tui-table__td">{{product.name}}</td>
+          <td class="tui-table__td">{{product.description}}</td>
+          <td class="tui-table__td tui-table__td_text_center">{{productService.getProductCategory(product.category)}}</td>
+          <td class="tui-table__td tui-table__td_text_center">{{product.price}} {{'RUB' | tuiCurrency }}</td>
+          <td class="tui-table__td tui-table__td_text_center">
+            <button
+              class="tui-space_right-2"
+              tuiIconButton
+              appearance="flat"
+              size="s"
+              actionIcon="edit"
+              title="Редактировать"
+              shape="rounded"
+              [routerLink]="product.id"
+            ></button>
+            <button
+              [showLoader]="deleteSelection.has(product.id)"
+              (click)="onRemoveProduct(product)"
+              tuiIconButton
+              appearance="secondary"
+              size="s"
+              actionIcon="delete"
+              title="Удалить"
+              shape="rounded"
+            ></button>
+          </td>
+        </tr>
+        <tr class="admin__table__empty" *ngIf="!isLoading && products.length === 0">
+          <td>Продукты отсутствуют</td>
+        </tr>
+        </tbody>
+      </table>
+
+      <div class="tui-table__pagination">
+        <tui-table-pagination
+          [total]="22"
+        ></tui-table-pagination>
+      </div>
+    </tui-loader>
+
+  </div>
+
+</div>

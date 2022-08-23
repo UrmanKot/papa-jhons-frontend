@@ -1,0 +1,16 @@
+<nav class="navigation">
+  <tui-scrollbar>
+    <tui-accordion [rounded]="false" [closeOthers]="false">
+      <tui-accordion-item
+        *ngFor="let link of navigationLinks"
+        [showArrow]="false"
+        [borders]="null"
+        size="m"
+      >
+        <a class="navigation__link" [routerLink]="link.command">
+          <strong>{{link.label}}</strong>
+        </a>
+      </tui-accordion-item>
+    </tui-accordion>
+  </tui-scrollbar>
+</nav>

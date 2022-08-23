@@ -1,0 +1,16 @@
+:host {
+  display: inline-block;
+  line-height: 81%;
+}
+
+tui-svg {
+  height: 1em;
+  width: 1em;
+  position: relative;
+  vertical-align: middle;
+
+  &.is-tui-icon {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+}
